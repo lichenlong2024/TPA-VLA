@@ -9,12 +9,15 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
 
 import torch
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
 from tqdm import tqdm
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from tpa_vla.data import HiddenStateActionDataset
 from tpa_vla.modules import ActionExpert, ProprioProjector, QueryModule, QueryWrappedExpert
@@ -29,6 +32,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--query_checkpoint", required=True)
     parser.add_argument("--output_json", default="")
     parser.add_argument("--hidden_dim", type=int, default=896)
+    parser.add_argument("--expert_blocks", type=int, default=24)
     parser.add_argument("--query_layers", type=int, default=3)
     parser.add_argument("--query_heads", type=int, default=8)
     parser.add_argument("--batch_size", type=int, default=32)
@@ -41,7 +45,7 @@ def main() -> None:
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     dtype = torch.bfloat16 if torch.cuda.is_available() else torch.float32
 
-    expert = ActionExpert(input_dim=args.hidden_dim, hidden_dim=args.hidden_dim)
+    expert = ActionExpert(input_dim=args.hidden_dim, hidden_dim=args.hidden_dim, num_blocks=args.expert_blocks)
     expert.load_state_dict(load_component_state_dict(args.expert_checkpoint), strict=True)
     expert.to(device=device, dtype=dtype).eval()
 

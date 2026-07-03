@@ -8,7 +8,7 @@ TPA-VLA mechanism while allowing users to connect any compatible VLA backbone.
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, Union
 
 import numpy as np
 import torch
@@ -28,7 +28,7 @@ class HiddenStateActionDataset(Dataset):
       - actions: [N, chunk, action_dim]
     """
 
-    def __init__(self, path: str | Path) -> None:
+    def __init__(self, path: Union[str, Path]) -> None:
         self.path = Path(path)
         payload = self._load_payload(self.path)
         self.hidden_states = self._as_tensor(payload["hidden_states"], torch.float32)
@@ -38,7 +38,7 @@ class HiddenStateActionDataset(Dataset):
 
     def _load_payload(self, path: Path) -> Dict[str, Any]:
         if path.suffix in {".pt", ".pth"}:
-            payload = torch.load(path, map_location="cpu", weights_only=False)
+            payload = torch.load(path, map_location="cpu")
         elif path.suffix == ".npz":
             with np.load(path) as npz:
                 payload = {key: npz[key] for key in npz.files}

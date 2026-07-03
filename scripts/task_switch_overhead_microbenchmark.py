@@ -23,6 +23,7 @@ import csv
 import gc
 import math
 import statistics
+import sys
 import time
 from dataclasses import dataclass
 from pathlib import Path
@@ -30,6 +31,8 @@ from typing import Dict, Iterable, List, Optional
 
 import torch
 import torch.nn as nn
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from tpa_vla.constants import ACTION_DIM, DEFAULT_TASK_TOKENS, PROPRIO_DIM
 from tpa_vla.modules import ActionExpert, ProprioProjector, QueryModule, QueryWrappedExpert

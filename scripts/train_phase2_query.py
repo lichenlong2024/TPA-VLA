@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
 
 import torch
@@ -16,6 +17,8 @@ import torch.nn.functional as F
 from torch.optim import AdamW
 from torch.utils.data import DataLoader
 from tqdm import tqdm
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from tpa_vla.data import HiddenStateActionDataset
 from tpa_vla.modules import ActionExpert, ProprioProjector, QueryModule, QueryWrappedExpert

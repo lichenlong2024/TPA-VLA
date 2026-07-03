@@ -2,10 +2,13 @@
 
 This repository exposes the TPA-VLA-specific code used by the paper:
 
+- `extract_hidden_cache.py`: exports hidden states from a JSONL manifest.
 - `QueryModule`: the lightweight task module switched at inference.
 - `ActionExpert`: the continuous action-chunk decoder shared across tasks.
 - `train_phase1_expert.py`: trains the Expert from temporarily adapted VLM hidden states.
 - `train_phase2_query.py`: freezes the Expert and trains only the task QueryModule.
+- `run_tpa_pipeline.py`: runs the Phase-I/Phase-II pipeline from YAML.
+- `run_expert_source_grid.py`: runs the Expert-source cross-validation grid.
 - `task_switch_overhead_microbenchmark.py`: isolates server-side task-switching overhead.
 - `shared_serving_sim.py`: simulates concurrent clients against one resident shared service.
 

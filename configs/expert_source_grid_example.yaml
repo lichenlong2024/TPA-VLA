@@ -1,0 +1,19 @@
+run_root: runs/expert_source_grid
+hidden_dim: 896
+batch_size: 16
+learning_rate: 1.0e-4
+phase1_steps: 10000
+phase2_steps: 10000
+query_layers: 3
+query_heads: 8
+expert_blocks: 24
+
+tasks:
+  - name: T1
+    phase1_cache: /path/to/T1_phase1_adapted_hidden_states.pt
+    phase2_cache: /path/to/T1_phase2_frozen_hidden_states.pt
+    eval_cache: /path/to/T1_eval_frozen_hidden_states.pt
+  - name: T2
+    phase1_cache: /path/to/T2_phase1_adapted_hidden_states.pt
+    phase2_cache: /path/to/T2_phase2_frozen_hidden_states.pt
+    eval_cache: /path/to/T2_eval_frozen_hidden_states.pt

@@ -13,13 +13,16 @@ import csv
 import json
 import queue
 import statistics
+import sys
 import threading
 import time
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 import torch
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from tpa_vla.constants import ACTION_DIM, DEFAULT_TASK_TOKENS, PROPRIO_DIM
 from tpa_vla.modules import ActionExpert, ProprioProjector, QueryModule, QueryWrappedExpert
@@ -108,7 +111,7 @@ def main() -> None:
         dtype=dtype,
     )
     proprio = torch.zeros(1, PROPRIO_DIM, device=device, dtype=dtype)
-    requests: queue.Queue[Request | None] = queue.Queue()
+    requests: "queue.Queue[Optional[Request]]" = queue.Queue()
     rows: List[Dict[str, object]] = []
 
     def client_loop(client_id: int, task_id: int) -> None:

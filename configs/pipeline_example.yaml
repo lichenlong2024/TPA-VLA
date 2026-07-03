@@ -1,0 +1,20 @@
+run_root: runs/tpa_vla_example
+hidden_dim: 896
+batch_size: 16
+learning_rate: 1.0e-4
+phase1_steps: 10000
+phase2_steps: 10000
+query_layers: 3
+query_heads: 8
+expert_blocks: 24
+
+phase1:
+  train_cache: /path/to/task1_phase1_adapted_hidden_states.pt
+
+tasks:
+  - name: task1
+    train_cache: /path/to/task1_phase2_frozen_hidden_states.pt
+    eval_cache: /path/to/task1_eval_frozen_hidden_states.pt
+  - name: task2
+    train_cache: /path/to/task2_phase2_frozen_hidden_states.pt
+    eval_cache: /path/to/task2_eval_frozen_hidden_states.pt

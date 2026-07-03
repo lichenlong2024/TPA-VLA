@@ -7,10 +7,10 @@ name = "tpa-vla"
 version = "0.1.0"
 description = "Core implementation for Two-Phase Adaptation VLA."
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.8"
 license = {file = "LICENSE"}
 dependencies = [
-    "torch>=2.2",
+    "torch>=1.11",
     "numpy",
     "tqdm",
     "pyyaml",
@@ -33,4 +33,4 @@ include = ["tpa_vla*"]
 
 [tool.ruff]
 line-length = 120
-target-version = "py310"
+target-version = "py38"
