@@ -1,0 +1,18 @@
+# Example checkpoint layout expected by the public scripts.
+#
+# run_root/
+#   task_1/
+#     expert/
+#       action_expert--step10000.pt
+#       proprio_projector--step10000.pt
+#     query/
+#       query_module--final.pt
+#     adapter/                 # optional, only used by the baseline switch-cost mode
+#       adapter_model.pt
+#   task_2/
+#     ...
+
+pretrained_vlm: /path/to/pretrained/vlm
+libero_root: /path/to/LIBERO
+run_root: /path/to/tpa_vla_runs
+output_dir: /path/to/output

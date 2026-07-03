@@ -1,0 +1,37 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# Local experiment outputs
+runs/
+outputs/
+logs/
+wandb/
+tensorboard/
+checkpoints/
+eval_logs/
+videos/
+
+# Large or private artifacts
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.safetensors
+*.tfrecord*
+*.hdf5
+*.h5
+*.mp4
+*.mov
+*.avi
+*.mkv
+
+# Credentials and machine-local config
+.env
+*.pem
+*.key
